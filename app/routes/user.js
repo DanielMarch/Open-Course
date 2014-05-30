@@ -4,13 +4,7 @@ var traceur = require('traceur');
 var User = traceur.require(__dirname + '/../models/user.js');
 
 exports.index = (req, res)=>{
-  var userId = req.session.userId;
-  if(userId){
-    res.render('user/index', {title: 'Welcome Back To Open Course'});
-  }
-  else{
-    res.redirect('/portal');
-  }
+  res.render('user/index', {title: 'Welcome Back To Open Course'});
 };
 
 exports.login = (req, res)=>{
@@ -37,4 +31,12 @@ exports.lookup = (req, res, next)=>{
     res.locals.user = u;
     next();
   });
+};
+
+exports.bounce = (req, res, next)=>{
+  if(res.locals.user){
+    next();
+  }else{
+    res.redirect('/portal');
+  }
 };

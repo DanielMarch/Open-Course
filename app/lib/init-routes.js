@@ -18,15 +18,17 @@ function load(app, fn){
   var user = traceur.require(__dirname + '/../routes/user.js');
   var courses = traceur.require(__dirname + '/../routes/courses.js');
 
-  app.all('*', dbg, user.lookup);
+  app.all('*', user.lookup);
 
   app.get('/', dbg, home.index);
   app.get('/about', dbg, home.about);
   app.get('/portal', dbg, home.portal);
 
   app.post('/login', dbg, user.login);
-  app.get('/logout', dbg, user.logout);
+
+  app.all('*', dbg, user.bounce);
   app.get('/user', dbg, user.index);
+  app.get('/logout', dbg, user.logout);
 
   app.get('/courses', dbg, courses.index);
   app.get('/user/courses', dbg, courses.user);
