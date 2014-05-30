@@ -1,0 +1,21 @@
+extends ../shared/template
+
+block content
+  .container
+    .row.clearfix
+        .col-md-12.column
+      .row.clearfix
+        .col-md-4.column
+        .col-md-4.column
+          .page-header
+            h1
+              small Sign up or login for free
+          form(action='/login', method='POST')
+            .form-group
+              label Email address
+              input.form-control(type='email', name='email', autofocus=true, placeholder='Email')
+            .form-group
+              label Password
+              input.form-control(type='password', name='password', placeholder='Password')
+            button.btn.btn-default Submit
+        .col-md-4.column

@@ -4,8 +4,40 @@ html
     meta(charset='utf-8')
     title= title
     link(href='/css/normalize.css', rel='stylesheet')
+    link(href='/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/css/bootstrap-theme.min.css', rel='stylesheet')
     link(href='/css/buttons.css', rel='stylesheet')
     link(href='/less/app.css', rel='stylesheet')
+
+    .container
+      .row.clearfix
+          .col-md-12.column
+            nav.navbar.navbar-default(role='navigation')
+              .navbar-header
+                button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                  span.sr-only Toggle navigation
+                  span.icon-bar
+                  span.icon-bar
+                  span.icon-bar
+                a.navbar-brand(href='/') Home
+              #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                ul.nav.navbar-nav
+                  li
+                    a(href='/about') About
+                  if(user)
+                      li
+                        a(href='/courses') Courses
+                if(!user)
+                  ul.nav.navbar-nav.navbar-right
+                    li
+                      a(href='/portal') Login
+                if(user)
+                  ul.nav.navbar-nav.navbar-right
+                    li
+                      a(href='/user')= user.email
+                    li
+                      a(href='/logout') Logout
+
   body
     block content
 
@@ -15,6 +47,7 @@ html
     script(src='/js/vendor/buttons.js')
     script(src='/js/vendor/traceur.js')
     script(src='/socket.io/socket.io.js')
+    script(src='/js/vendor/bootstrap.min.js')
     script(src='/js/es5/main.js')
     script(src='/js/es6/compiled/main.js')
     script(src='/js/es6/compiled/sockets.js')
