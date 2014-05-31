@@ -1,0 +1,22 @@
+extends ../shared/template
+
+block content
+  .container
+      .row.clearfix
+          .col-md-12.column
+            .page-header
+              h1= course.name
+                br
+                small=course.description
+            table.table.table-hover
+              thead
+                tr
+                  th
+                    | Lesson Name
+                  th
+                    | Lesson Description
+              tbody
+                each lesson in lessons
+                  tr
+                    td: a(href='/lessons/#{lesson._id}')= lesson.name
+                    td= lesson.description

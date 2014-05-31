@@ -18,10 +18,8 @@ block content
                   th
                     | Course Description
               tbody
-                tr
-                  td
-                    | 1
-                  td
-                    | TB - Monthly
-                  td
-                    | 01/04/2012
+                each course in courses
+                  tr
+                    td: a(href='/user/courses/#{course._id}')= course.name
+                    td= course.subject
+                    td= course.description

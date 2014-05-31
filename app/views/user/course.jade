@@ -1,0 +1,51 @@
+extends ../shared/template
+
+block content
+  .container
+    .row.clearfix
+        .col-md-12.column
+          .page-header
+            h1
+              small Edit Course
+          form.edit(method='POST', action='/user/courses/#{course._id}')
+            input(type='hidden', name='_method', value='put')
+            .form-group
+              label Course Name
+              input.form-control(type='text', name='name', placeholder='Enter Course Name', value=course.name)
+            .form-group
+              label Course Description
+              input.form-control(type='text',name='description', placeholder='Enter Course Description', value=course.description)
+            .form-group
+              label Course Subject
+              select.form-control(type='text', name='subject')
+                option(selected=(course.subject === 'Agriculture' ? true : false)) Agriculture
+                option(selected=(course.subject === 'Culinary' ? true : false)) Culinary
+                option(selected=(course.subject === 'History' ? true : false)) History
+                option(selected=(course.subject === 'Languages' ? true : false)) Languages
+                option(selected=(course.subject === 'Math' ? true : false)) Math
+                option(selected=(course.subject === 'Science' ? true : false)) Science
+                option(selected=(course.subject === 'Technology' ? true : false)) Technology
+            button.btn.btn-default(type='submit') Save Course
+          .row.clearfix
+            .col-md-4.column
+              a.btn.btn-block.btn-success(href='/user/courses/#{course._id}/lessons/new') Create a Lesson
+            .col-md-4.column
+            .col-md-4.column
+              form(method='POST', action='/user/courses/#{course._id}')
+                input(type="hidden" name="_method" value="DELETE")
+                button.btn.btn-block.btn-warning Delete Course
+          .page-header
+            h1
+              small Lessons
+          table.table.table-hover
+            thead
+              tr
+                th
+                  | Lesson Name
+                th
+                  | Lesson Description
+            tbody
+              each lesson in lessons
+                tr
+                  td: a(href='/user/courses/lessons/#{lesson._id}')= lesson.name
+                  td= lesson.description
